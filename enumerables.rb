@@ -49,10 +49,19 @@ module Enumerable
   end
   
   def my_inject
-    puts "running function"
-    final = 0
-    self.my_each {|i| final += i}
-    final
+    if block_given?
+      mode = self.first
+      working = self.drop(1)
+      working.my_each {|i| mode = yield(mode, i)}
+      mode
+    end
+  end
+
+   def my_inject_2(result=nil)
+    #Return tracker
+    result = self[0] if result==nil
+    self.my_each{ |element| result = yield(result, element)}
+    result
   end
 
 
