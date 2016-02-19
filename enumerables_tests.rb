@@ -1,9 +1,10 @@
 require_relative 'enumerables.rb'
 
+values = [1, 2, 3, 4, 5]
 
-
-def multiply_els(arr)
-  arr.my_inject{|mode, i| mode * i}
+map_proc = Proc.new do
+  puts "proc time"
 end
 
-puts multiply_els([2, 4, 5])
+puts values.my_map(map_proc)
+

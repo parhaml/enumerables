@@ -42,10 +42,16 @@ module Enumerable
     count
   end
 
-  def my_map
-    values = []
-    self.my_each {|i| values << (yield i)}
-    values
+  def my_map(*arg)
+    if arg != nil
+      proc = arg
+      proc.call
+    end
+    if block_given?
+      values = []
+      self.my_each {|i| values << (yield i)}
+      values
+    end
   end
   
   def my_inject
@@ -56,14 +62,6 @@ module Enumerable
       mode
     end
   end
-
-   def my_inject_2(result=nil)
-    #Return tracker
-    result = self[0] if result==nil
-    self.my_each{ |element| result = yield(result, element)}
-    result
-  end
-
 
 end
 
